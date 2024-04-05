@@ -9,6 +9,9 @@ import { APIs_V1 } from '~/routes/v1'
 const START_SEVER = () => {
   const app = express()
 
+  app.use(express.json())
+
+  // Use APIs V1
   app.use('/v1', APIs_V1)
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
