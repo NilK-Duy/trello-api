@@ -5,14 +5,19 @@ import exitHook from 'async-exit-hook'
 import { CONNECT_DB, CLOSE_DB } from '~/config/mongodb'
 import { env } from '~/config/environment'
 import { APIs_V1 } from '~/routes/v1'
+import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware'
 
 const START_SEVER = () => {
   const app = express()
 
+  // Enable req.body json data
   app.use(express.json())
 
   // Use APIs V1
   app.use('/v1', APIs_V1)
+
+  // Middleware xử lý lỗi tập trung
+  app.use(errorHandlingMiddleware)
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
     console.log(`3. Hi ${env.AUTHOR} Back-end Server is running succesfully at Host: ${env.APP_HOST} and port: ${env.APP_POST}/`)
@@ -49,4 +54,3 @@ const START_SEVER = () => {
 //     console.error(error)
 //     process.exit(0)
 //   })
-
