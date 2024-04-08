@@ -2,7 +2,7 @@
 import { slugify } from '~/utils/formatters'
 import { boardModel } from '~/models/boardModel'
 import ApiError from '~/utils/ApiError'
-import { StatusCode } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import { cloneDeep } from 'lodash'
 
 const createNew = async (reqBody) => {
@@ -34,7 +34,7 @@ const getDetails = async (boardId) => {
     // Gọi tới tầng Model để xử lý lưu bản ghi getDetails vào Database
     const board = await boardModel.getDetails(boardId)
     if (!board) {
-      throw new ApiError(StatusCode.NOT_FOUND, 'Board not found!')
+      throw new ApiError(StatusCodes.NOT_FOUND, 'Board not found!')
     }
 
     // B1: Deep Clone board ra một cái mới để xử lý, không ảnh hưởng tới board ban đầu, tùy mục đích về sau mà có cần clone deep hay không.
