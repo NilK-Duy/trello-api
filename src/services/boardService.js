@@ -43,10 +43,10 @@ const getDetails = async (boardId) => {
     // B2: Đưa card về đúng column của nó
     resBoard.columns.forEach(column => {
       // Cách dùng .equals() cho thấy ObjectId trong MongoDB có support method .equals()
-      column.cards = resBoard.cards.filter(card => card.columnId.equals(column._id))
+      // column.cards = resBoard.cards.filter(card => card.columnId.equals(column._id))
 
       // // Cách này convert ObjectId về string bằng hàm toString() của JavaScript
-      // column.cards = resBoard.cards.filter(card => card.columnId.toString() === column._id.toString())
+      column.cards = resBoard.cards.filter(card => card.columnId.toString() === column._id.toString())
     })
 
     // B3: Xóa mảng cards khỏi board ban đầu
