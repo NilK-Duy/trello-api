@@ -24,10 +24,19 @@ const START_SEVER = () => {
   // Middleware xử lý lỗi tập trung
   app.use(errorHandlingMiddleware)
 
-  app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`3. Hi ${env.AUTHOR} Back-end Server is running succesfully at Host: ${env.APP_HOST} and port: ${env.APP_POST}/`)
-  })
+  // Môi trường Production (cụ thể hiện tại support Render.com)
+  if (env.BUILD_MODE === 'production') {
+    app.listen(process.env.PORT, () => {
+      console.log(`3. Production: Hi ${env.AUTHOR} Back-end Server is running succesfully at Port: ${process.env.PORT}`)
+    })
+  } else {
+    // Môi trường Local Dev
+    app.listen(env.LOCAL_DEV_APP_PORT, env.LOCAL_DEV_APP_HOST, () => {
+      console.log(`3. Local DEV: Hi ${env.AUTHOR} Back-end Server is running succesfully at Host: ${env.LOCAL_DEV_APP_HOST} and Port: ${env.LOCAL_DEV_APP_PORT}`)
+    })
+  }
 
+  // Thực hiện các tác vụ cleanup trước khi dừng server
   exitHook(() => {
     console.log('4. disconnecting...')
     CLOSE_DB()
