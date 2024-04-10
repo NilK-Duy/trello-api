@@ -3,9 +3,9 @@ import { slugify } from '~/utils/formatters'
 import { boardModel } from '~/models/boardModel'
 import { columnModel } from '~/models/columnModel'
 import { cardModel } from '~/models/cardModel'
-import ApiError from '~/utils/ApiError'
-import { StatusCodes } from 'http-status-codes'
 import { cloneDeep } from 'lodash'
+import { StatusCodes } from 'http-status-codes'
+import ApiError from '~/utils/ApiError'
 
 const createNew = async (reqBody) => {
   try {
